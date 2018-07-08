@@ -16,3 +16,12 @@ Freefall Inverted Pendulum System
 python free_fall_cart_and_pendulum.py
 ```
 ![Free fall Inverted Pendulum and Cart](media/freefall_pendulum_and_cart.gif)
+
+
+### Forced Inverted Pendulum and Cart System
+In this example, the motors on the cart are actuated at fixed time.
+Thus, they deliver an external force on the system at pre-determined time.
+```
+python forced_cart_and_pendulum.py
+```
+![Forced Inverted Pendulum and Cart](media/forced_pendulum_cart.gif)
