@@ -1,0 +1,6 @@
+alpha: -sin( \theta ) / (   l * (M+m-m*sin(\theta)*sin(\theta));
+beta: 1 / ( M+m-m*sin(\theta) )
+gamma : -m*l* ('diff( \theta, t ) )^2  * cos(\theta) + m*g*sin(\theta) * cos( \theta );
+
+'diff( \theta, t, 2 ) = alpha * u + alpha * gamma -g/l*cos(\theta) ;
+'diff( x, t,2 ) = beta * u + beta*gamma;
