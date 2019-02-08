@@ -44,7 +44,7 @@ if __name__=="__main__":
     # it is possible to derive with hand. The entire notes are in media folder or the
     # blog post for this entry. Otherwse in essense it is very similar to free_fall_pendulum.py
     # For more comments see free_fall_pendulum.py
-    sol = solve_ivp(func3, [0, 20], [ -1.0, 0., np.pi/2 + 0.1, 0. ],   t_eval=np.linspace( 0, 20, 300)  )
+    sol = solve_ivp(func3, [0, 20], [ -1.0, 0., np.pi/2 - 0.1, 0. ],   t_eval=np.linspace( 0, 20, 300)  )
 
 
     syst = InvertedPendulum()
