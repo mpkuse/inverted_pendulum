@@ -37,7 +37,7 @@ class MyLinearizedSystem:
 
 # Global Variables
 ss = MyLinearizedSystem()
-ss.compute_K(desired_eigs = np.array([-10.1, -10.2, -10.3, -10.4])*0.000001 )
+ss.compute_K(desired_eigs = np.array([-10.1, -10.2, -10.3, -10.4])*0.1 )
 
 
 
@@ -48,9 +48,9 @@ ss.compute_K(desired_eigs = np.array([-10.1, -10.2, -10.3, -10.4])*0.000001 )
 def u( t , y ):
     u_ = -np.matmul( ss.K , y )
     print 'u()', t, u_
-    # code.interact(local=dict(globals(), **locals()))
-    return 0.1
-    # return u_[0]
+    code.interact(local=dict(globals(), **locals()))
+    # return 0.1
+    return u_[0]
 
 # Pendulum and cart system (non-linear eq). The motors on the cart turned at fixed time. In other words
 # The motors are actuated to deliver forward x force from t=t1 to t=t2.
