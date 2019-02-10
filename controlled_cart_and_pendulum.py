@@ -37,7 +37,8 @@ class MyLinearizedSystem:
 
 # Global Variables
 ss = MyLinearizedSystem()
-ss.compute_K(desired_eigs = np.array([-10.1, -10.2, -10.3, -10.4])*0.1 )
+ss.compute_K(desired_eigs = np.array([-.1, -.2, -.3, -.4])*3. ) # Arbitarily set desired eigen values
+
 
 
 
@@ -46,9 +47,9 @@ ss.compute_K(desired_eigs = np.array([-10.1, -10.2, -10.3, -10.4])*0.1 )
 # LQRs are more theoritically grounded, they are a class of optimal control algorithms.
 # The control law is u = KY. K is the unknown which is computed as a solution to minimization problem.
 def u( t , y ):
-    u_ = -np.matmul( ss.K , y )
-    print 'u()', t, u_
-    code.interact(local=dict(globals(), **locals()))
+    u_ = -np.matmul( ss.K , y - np.array([0,0,np.pi/2.,0]) ) # This was important
+    print 'u()', 't=',t, 'u_=', u_
+    # code.interact(local=dict(globals(), **locals()))
     # return 0.1
     return u_[0]
 
@@ -78,7 +79,7 @@ def y_dot( t, y ):
 
     return [ y[1], x_ddot + damping_x, y[3], theta_ddot + damping_theta ]
 
-if __name__=="__main__":
+if __name__=="__1main__":
 
     # Verifying the correctness of linearization by evaluating y_dot
     # in two ways a) non-linear b) linear approximation
@@ -88,16 +89,18 @@ if __name__=="__main__":
     print 'linearized ', np.matmul( ss.A, at_y - np.array([0,0,np.pi/2.,0]) )  + ss.B.T * 0.1
     code.interact(local=dict(globals(), **locals()))
 
+    # See also analysis_of_linearization to know more.
+
 
 
 # Both cart and the pendulum can move.
-if __name__=="__1main__":
+if __name__=="__main__":
     # We need to write the Euler-lagrange equations for the both the
     # systems (bob and cart). The equations are complicated expressions. Although
     # it is possible to derive with hand. The entire notes are in media folder or the
     # blog post for this entry. Otherwse in essense it is very similar to free_fall_pendulum.py
     # For more comments see free_fall_pendulum.py
-    sol = solve_ivp(y_dot, [0, 10], [ 0.0, 0., np.pi/2 + 0.01, 0. ],   t_eval=np.linspace( 0, 10, 100)  )
+    sol = solve_ivp(y_dot, [0, 20], [ 0.0, 0., np.pi/2 + 0.01, 0. ],   t_eval=np.linspace( 0, 20, 100)  )
 
 
     syst = InvertedPendulum()
@@ -107,5 +110,5 @@ if __name__=="__1main__":
         cv2.imshow( 'im', rendered )
         cv2.moveWindow( 'im', 100, 100 )
 
-        if cv2.waitKey(0) == ord('q'):
+        if cv2.waitKey(30) == ord('q'):
             break
