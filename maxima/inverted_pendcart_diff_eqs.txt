@@ -1,6 +1,12 @@
-alpha: -sin( \theta ) / (   l * (M+m-m*sin(\theta)*sin(\theta));
-beta: 1 / ( M+m-m*sin(\theta) )
+alpha: -sin( \theta ) / (   l * (M+m-m*sin(\theta)*sin(\theta)) );
+beta: 1 / ( M+m-m*sin(\theta)*sin(\theta) )
 gamma : -m*l* ('diff( \theta, t ) )^2  * cos(\theta) + m*g*sin(\theta) * cos( \theta );
 
-'diff( \theta, t, 2 ) = alpha * u + alpha * gamma -g/l*cos(\theta) ;
+# Without Damping Terms
 'diff( x, t,2 ) = beta * u + beta*gamma;
+'diff( \theta, t, 2 ) = -g/l*cos(\theta) - 1/l*sin(\theta) * ( alpha * u + alpha * gamma -g/l*cos(\theta) )
+
+
+# With Damping Terms
+'diff( x, t,2 ) = (beta * u + beta*gamma) - d1*'diff( x, t ) ;
+'diff( \theta, t, 2 ) = -g/l*cos(\theta) - 1/l*sin(\theta) * ( alpha * u + alpha * gamma -g/l*cos(\theta) ) - d2*'diff(\theta, t)
