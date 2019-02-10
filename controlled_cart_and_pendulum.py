@@ -29,6 +29,7 @@ class MyLinearizedSystem:
         self.B = np.expand_dims( np.array( [0, 1.0/M, 0., -1/(M*L)] ) , 1 ) # 4x1
 
     def compute_K(self, desired_eigs = [-0.1, -0.2, -0.3, -0.4] ):
+        print '[compute_K] desired_eigs=', desired_eigs
         self.K = control.place( self.A, self.B,  desired_eigs )
 
     def get_K(self):
@@ -37,9 +38,18 @@ class MyLinearizedSystem:
 
 # Global Variables
 ss = MyLinearizedSystem()
-ss.compute_K(desired_eigs = np.array([-.1, -.2, -.3, -.4])*3. ) # Arbitarily set desired eigen values
 
+# Arbitrarily set Eigen Values
+#ss.compute_K(desired_eigs = np.array([-.1, -.2, -.3, -.4])*3. ) # Arbitarily set desired eigen values
 
+# Eigen Values set by LQR
+Q = np.diag( [1,1,1,1.] )
+R = np.diag( [1.] )
+# K : State feedback for stavility
+# S : Solution to Riccati Equation
+# E : Eigen values of the closed loop system
+K, S, E = control.lqr( ss.A, ss.B, Q, R )
+ss.compute_K(desired_eigs = E ) # Arbitarily set desired eigen values
 
 
 
@@ -110,5 +120,5 @@ if __name__=="__main__":
         cv2.imshow( 'im', rendered )
         cv2.moveWindow( 'im', 100, 100 )
 
-        if cv2.waitKey(30) == ord('q'):
+        if cv2.waitKey(0) == ord('q'):
             break

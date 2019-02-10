@@ -33,10 +33,14 @@ See also `anaysis_linearization.py` for analysis of linearized system and its
 stability.
 
 For this we have made used of the python package [control](https://python-control.readthedocs.io/en/0.8.1/generated/control.lqr.html) for
-the functions `pole_place` and `lqr`. In the future will try and implement these
-by myself. There were a few things that need to be mathematically correct for
-this to work. Look at the code to know the exact details. 
+the functions `pole_place` and `lqr`. In the future will try and
+understand how these work and implement these.
+There were a few subtle things that need to be mathematically correct for
+this to work. Look at the code to know the exact details.
 ```
 python controlled_cart_and_pendulum.py
 ```
-![Forced Inverted Pendulum and Cart](media/controlled_cart_and_pendulum.gif)
+![Controlled Inverted Pendulum and Cart](media/controlled_cart_and_pendulum.gif)
+
+Here is the system stabilized using Eigenvalues as a result of LQR (Linear Quadratic Regular)
+![Controlled Inverted Pendulum and Cart](media/LQR_controlled_cartpend.gif)
